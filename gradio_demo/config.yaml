@@ -1,0 +1,9 @@
+mesh_config_relative: True    # mesh is placed relative to the config file
+use_mesh_name: True
+prompt: ""
+num_inference_steps: 20
+guidance_scale: 5.0
+seed: 1
+mesh_scale: 1
+conditioning_scale: 0.5
+mvd_end: 0.0

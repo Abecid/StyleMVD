@@ -1,0 +1,13 @@
+style_img: "./data_style/volcaino.png"
+mesh: "./face.obj"
+mesh_config_relative: True    # mesh is placed relative to the config file
+use_mesh_name: True
+output: exp_results
+prompt: ""
+num_inference_steps: 20
+cond_type: "canny"
+guidance_scale: 5.0
+seed: 0
+mesh_scale: 1
+conditioning_scale: 0.5
+mvd_end: 0.0
