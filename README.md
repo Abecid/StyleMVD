@@ -40,7 +40,7 @@ mv IP-Adapter/sdxl_models sdxl_models
 
 Then install PyTorch3D through the following URL (change the respective Python, CUDA and PyTorch version in the link for the binary compatible with your setup), or install according to official installation guide
 ```
-pip install https://dl.fbaipublicfiles.com/pytorch3d/packaging/wheels/py310_cu121_pyt212/download.html
+pip install https://dl.fbaipublicfiles.com/pytorch3d/packaging/wheels/py310_cu121_pyt212/pytorch3d-0.7.5-cp310-cp310-linux_x86_64.whl
 ```
 
 ## Inference
