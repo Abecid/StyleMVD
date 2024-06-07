@@ -2,7 +2,6 @@ torch==2.1.2
 torchvision
 diffusers==0.27.2
 transformers==4.36.0
-xformers==0.0.20
 xatlas
 accelerate
 cupy-cuda11x==12.2.0
