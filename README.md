@@ -28,7 +28,7 @@ Follow [IP-Adapter](https://github.com/tencent-ailab/IP-Adapter?tab=readme-ov-fi
 ```
 # create the environment
 conda create -n stylemvd python=3.10
-conda activate stlyemvd
+conda activate stylemvd
 pip install -r requirements.txt
 
 # download the models
