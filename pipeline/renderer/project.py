@@ -466,6 +466,7 @@ class UVProjection():
 		for i in range(len(self.cameras)):    
 			bake_tex = TexturesUV([bake_maps[i]], tmp_mesh.textures.faces_uvs_padded(), tmp_mesh.textures.verts_uvs_padded(), sampling_mode=self.sampling_mode)
 			tmp_mesh.textures = bake_tex
+            # TODO 3: Fix for Occluded Regions
 			images_predicted = self.renderer(tmp_mesh, cameras=self.cameras[i], lights=self.lights, device=self.device)
 			predicted_rgb = images_predicted[..., :-1]
 			loss += (((predicted_rgb[...] - views[i]))**2).sum()

@@ -23,6 +23,7 @@ from safetensors import safe_open
 
 from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTextModelWithProjection, CLIPTokenizer, CLIPVisionModelWithProjection
 from .renderer.project import UVProjection as UVP
+from .renderer.ray_casting import get_plane_images
 from .utils import *
 
 
@@ -629,6 +630,9 @@ class StableStyleMVDPipeline(StableDiffusionXLControlNetPipeline):
         
         latent_tex = self.uvp.set_noise_texture()
         noise_views = self.uvp.render_textured_views()
+        
+        # TODO 1: Add Occluded Images Here
+        
         foregrounds = [view[:-1] for view in noise_views]
         masks = [view[-1:] for view in noise_views]
         composited_tensor = composite_rendered_view(self.scheduler, latents, foregrounds, masks, timesteps[0]+1)
@@ -711,6 +715,8 @@ class StableStyleMVDPipeline(StableDiffusionXLControlNetPipeline):
                 # mix prompt embeds according to azim angle
                 positive_prompt_embeds = [azim_prompt(prompt_embed_dict, pose) for pose in self.camera_poses]
                 positive_prompt_embeds = torch.stack(positive_prompt_embeds, axis=0)
+                
+                ## TODO 2: Add Prompt Embeddings for occluded images
 
                 negative_prompt_embeds = [azim_neg_prompt(negative_prompt_embed_dict, pose) for pose in self.camera_poses]
                 negative_prompt_embeds = torch.stack(negative_prompt_embeds, axis=0)
