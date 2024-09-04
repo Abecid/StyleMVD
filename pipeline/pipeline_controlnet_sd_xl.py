@@ -632,6 +632,7 @@ class StableStyleMVDPipeline(StableDiffusionXLControlNetPipeline):
         noise_views = self.uvp.render_textured_views()
         
         # TODO 1: Add Occluded Images Here
+        occluded_views = 
         
         foregrounds = [view[:-1] for view in noise_views]
         masks = [view[-1:] for view in noise_views]
