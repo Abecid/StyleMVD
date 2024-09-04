@@ -632,7 +632,24 @@ class StableStyleMVDPipeline(StableDiffusionXLControlNetPipeline):
         noise_views = self.uvp.render_textured_views()
         
         # TODO 1: Add Occluded Images Here
-        occluded_views = 
+        occluded_views = get_plane_images(
+            self.uvp_rgb.mesh,
+            self.camera_poses,
+            0.9, # Field of view in radians (e.g., 0.9 radians ≈ 51.6 degrees)
+            4, # Max hits
+        )
+        
+        occluded_images = [v['images'] for v in occluded_views]
+        # Step 1: Stack occluded images into a single tensor
+        # occluded_images has shape (hits, views, H, W, C)
+
+        # Convert occluded_images to a tensor
+        occluded_images_tensor = torch.stack([torch.tensor(img) for img in occluded_images], dim=1)
+        # Step 2: Permute to get (hits * views, C, H, W)
+        occluded_images_tensor = occluded_images_tensor.permute(0, 1, 4, 2, 3)  # Permuting to (hits, views, C, H, W)
+
+        # Step 3: Reshape to (-1, C, H, W)
+        occluded_images_tensor = occluded_images_tensor.reshape(-1, *occluded_images_tensor.shape[2:5])
         
         foregrounds = [view[:-1] for view in noise_views]
         masks = [view[-1:] for view in noise_views]

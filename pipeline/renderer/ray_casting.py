@@ -56,7 +56,7 @@ def ray_cast_mesh(mesh, rays_o, rays_d):
     )
     return index_triangles, index_ray, point_cloud
 
-def get_plane_images(mesh, views, camera_angle_x, max_hits, output_path, image_height, image_width):
+def get_plane_images(mesh, views, camera_angle_x, max_hits, image_height=512, image_width=512):
     camera_angle_x = float(camera_angle_x)
     
     focal_length = 0.5 * image_width / np.tan(0.5 * camera_angle_x)
